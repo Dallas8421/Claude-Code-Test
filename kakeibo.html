@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家計簿</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f5; color: #333; }
+
+  header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+  header h1 { font-size: 20px; font-weight: 600; }
+
+  .container { max-width: 960px; margin: 24px auto; padding: 0 16px; display: grid; gap: 20px; }
+
+  /* Summary cards */
+  .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8e8e8; }
+  .card .label { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .card .amount { font-size: 24px; font-weight: 700; }
+  .card.income .amount { color: #2ecc71; }
+  .card.expense .amount { color: #e74c3c; }
+  .card.balance .amount { color: #3498db; }
+
+  /* Form */
+  .form-card { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8e8e8; }
+  .form-card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end; }
+  .field label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
+  .field input, .field select { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; }
+  .field input:focus, .field select:focus { border-color: #3498db; }
+  .btn-add { padding: 8px 20px; background: #3498db; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; white-space: nowrap; height: 36px; }
+  .btn-add:hover { background: #2980b9; }
+
+  /* Charts */
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .chart-card { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8e8e8; }
+  .chart-card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 220px; }
+
+  /* Transaction list */
+  .list-card { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8e8e8; }
+  .list-card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; padding: 8px 10px; border-bottom: 2px solid #f0f0f0; font-size: 12px; color: #888; font-weight: 500; }
+  td { padding: 10px 10px; border-bottom: 1px solid #f5f5f5; }
+  tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+  .tag.income { background: #eafaf1; color: #27ae60; }
+  .tag.expense { background: #fdedec; color: #c0392b; }
+  .btn-del { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; padding: 2px 6px; }
+  .btn-del:hover { color: #e74c3c; }
+  .empty { text-align: center; color: #bbb; padding: 32px 0; }
+
+  @media (max-width: 640px) {
+    .summary { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+    .form-row .btn-add { grid-column: span 2; }
+    .charts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+  <h1>家計簿</h1>
+</header>
+
+<div class="container">
+
+  <!-- Summary -->
+  <div class="summary">
+    <div class="card income">
+      <div class="label">収入合計</div>
+      <div class="amount" id="totalIncome">¥0</div>
+    </div>
+    <div class="card expense">
+      <div class="label">支出合計</div>
+      <div class="amount" id="totalExpense">¥0</div>
+    </div>
+    <div class="card balance">
+      <div class="label">残高</div>
+      <div class="amount" id="balance">¥0</div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card">
+    <h2>取引を追加</h2>
+    <div class="form-row">
+      <div class="field">
+        <label>日付</label>
+        <input type="date" id="inputDate">
+      </div>
+      <div class="field">
+        <label>内容</label>
+        <input type="text" id="inputDesc" placeholder="例: 食費">
+      </div>
+      <div class="field">
+        <label>種別・金額</label>
+        <div style="display:flex;gap:6px;">
+          <select id="inputType" style="width:90px;padding:8px 6px;border:1px solid #ddd;border-radius:6px;font-size:14px;">
+            <option value="income">収入</option>
+            <option value="expense">支出</option>
+          </select>
+          <input type="number" id="inputAmount" placeholder="金額" min="0" style="flex:1;">
+        </div>
+      </div>
+      <button class="btn-add" onclick="addEntry()">追加</button>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts">
+    <div class="chart-card">
+      <h2>月別 収支推移</h2>
+      <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h2>支出内訳</h2>
+      <div class="chart-wrap"><canvas id="pieChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- List -->
+  <div class="list-card">
+    <h2>取引一覧</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>日付</th><th>内容</th><th>種別</th><th>金額</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg">取引がありません</div>
+  </div>
+
+</div>
+
+<script>
+let entries = JSON.parse(localStorage.getItem('kakeibo') || '[]');
+let barChart, pieChart;
+
+function fmt(n) {
+  return '¥' + Math.abs(n).toLocaleString();
+}
+
+function save() {
+  localStorage.setItem('kakeibo', JSON.stringify(entries));
+}
+
+function addEntry() {
+  const date = document.getElementById('inputDate').value;
+  const desc = document.getElementById('inputDesc').value.trim();
+  const type = document.getElementById('inputType').value;
+  const amount = parseInt(document.getElementById('inputAmount').value);
+
+  if (!date || !desc || !amount || amount <= 0) {
+    alert('すべての項目を入力してください。');
+    return;
+  }
+
+  entries.unshift({ id: Date.now(), date, desc, type, amount });
+  save();
+  document.getElementById('inputDesc').value = '';
+  document.getElementById('inputAmount').value = '';
+  render();
+}
+
+function deleteEntry(id) {
+  entries = entries.filter(e => e.id !== id);
+  save();
+  render();
+}
+
+function render() {
+  const tbody = document.getElementById('tbody');
+  const totalIncome = entries.filter(e => e.type === 'income').reduce((s, e) => s + e.amount, 0);
+  const totalExpense = entries.filter(e => e.type === 'expense').reduce((s, e) => s + e.amount, 0);
+
+  document.getElementById('totalIncome').textContent = fmt(totalIncome);
+  document.getElementById('totalExpense').textContent = fmt(totalExpense);
+  const bal = totalIncome - totalExpense;
+  const balEl = document.getElementById('balance');
+  balEl.textContent = (bal < 0 ? '-' : '') + fmt(bal);
+  balEl.style.color = bal < 0 ? '#e74c3c' : '#3498db';
+
+  document.getElementById('emptyMsg').style.display = entries.length ? 'none' : 'block';
+
+  tbody.innerHTML = entries.sort((a, b) => b.date.localeCompare(a.date)).map(e => `
+    <tr>
+      <td>${e.date}</td>
+      <td>${e.desc}</td>
+      <td><span class="tag ${e.type}">${e.type === 'income' ? '収入' : '支出'}</span></td>
+      <td style="color:${e.type === 'income' ? '#27ae60' : '#c0392b'};font-weight:600;">
+        ${e.type === 'income' ? '+' : '-'}${fmt(e.amount)}
+      </td>
+      <td><button class="btn-del" onclick="deleteEntry(${e.id})">✕</button></td>
+    </tr>
+  `).join('');
+
+  renderCharts();
+}
+
+function renderCharts() {
+  // Bar chart: monthly income/expense (last 6 months)
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(1);
+    d.setMonth(d.getMonth() - i);
+    months.push(d.toISOString().slice(0, 7));
+  }
+
+  const incomeData = months.map(m => entries.filter(e => e.type === 'income' && e.date.startsWith(m)).reduce((s, e) => s + e.amount, 0));
+  const expenseData = months.map(m => entries.filter(e => e.type === 'expense' && e.date.startsWith(m)).reduce((s, e) => s + e.amount, 0));
+  const labels = months.map(m => m.slice(5) + '月');
+
+  if (barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: '収入', data: incomeData, backgroundColor: '#a8e6cf', borderRadius: 4 },
+        { label: '支出', data: expenseData, backgroundColor: '#ffaaa5', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
+      scales: { y: { ticks: { callback: v => '¥' + v.toLocaleString(), font: { size: 11 } }, grid: { color: '#f0f0f0' } }, x: { ticks: { font: { size: 11 } }, grid: { display: false } } }
+    }
+  });
+
+  // Pie chart: expense by category
+  const catMap = {};
+  entries.filter(e => e.type === 'expense').forEach(e => {
+    catMap[e.desc] = (catMap[e.desc] || 0) + e.amount;
+  });
+
+  const pieLabels = Object.keys(catMap);
+  const pieData = Object.values(catMap);
+  const colors = ['#ff8b94','#ffaaa5','#ffd3b6','#dcedc1','#a8e6cf','#a8d8ea','#c7b8ea','#f4c2c2','#b5ead7','#e2f0cb'];
+
+  if (pieChart) pieChart.destroy();
+  if (pieLabels.length === 0) {
+    pieChart = new Chart(document.getElementById('pieChart'), {
+      type: 'doughnut',
+      data: { labels: ['データなし'], datasets: [{ data: [1], backgroundColor: ['#eee'] }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
+  } else {
+    pieChart = new Chart(document.getElementById('pieChart'), {
+      type: 'doughnut',
+      data: {
+        labels: pieLabels,
+        datasets: [{ data: pieData, backgroundColor: colors.slice(0, pieLabels.length), borderWidth: 2, borderColor: '#fff' }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 8 } } }
+      }
+    });
+  }
+}
+
+// Set today's date as default
+document.getElementById('inputDate').value = new Date().toISOString().slice(0, 10);
+
+render();
+</script>
+</body>
+</html>
