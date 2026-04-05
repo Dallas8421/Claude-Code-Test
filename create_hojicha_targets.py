@@ -32,15 +32,15 @@ for col, header in enumerate(headers, 1):
 data = [
     # ===== SINGAPORE (30 stores) =====
     # Specialty Cafes
-    ("Singapore", "Singapore", "Nylon Coffee Roasters", "Specialty Cafe", "https://nyloncoffee.sg", "@nyloncoffee", "info@nyloncoffee.sg", "Award-winning micro-roastery; single-origin focus; hojicha menu potential"),
+    ("Singapore", "Singapore", "Nylon Coffee Roasters", "Specialty Cafe", "https://nylon.coffee", "@nyloncoffee", "hello@nyloncoffee.com", "Award-winning micro-roastery; single-origin focus; hojicha menu potential"),
     ("Singapore", "Singapore", "Chye Seng Huat Hardware (PPP Coffee)", "Specialty Cafe", "https://pppcoffee.com", "@pppcoffee", "hello@pppcoffee.com", "Pioneer SG specialty cafe; roastery on-site; strong tea menu interest"),
     ("Singapore", "Singapore", "Sarnies", "Specialty Cafe", "https://sgcoffee.sarnies.com", "@sarniescoffee", "info@sarnies.com.sg", "CBD flagship; Australian-style café; curated tea & coffee menu"),
     ("Singapore", "Singapore", "The Coffee Academics", "Specialty Cafe", "https://www.theacademicsgroup.com", "@thecoffeeacademics", "info@theacademicsgroup.com", "48 stores across Asia; award-winning roasters; active Japanese tea interest"),
     ("Singapore", "Singapore", "Dutch Colony Coffee Co.", "Specialty Cafe", "https://www.dutchcolony.com", "@dutchcolonycoffee", "hello@dutchcolony.com", "Artisan roastery café; single-origin specialty; boutique tea offerings"),
-    ("Singapore", "Singapore", "Common Man Coffee Roasters", "Specialty Cafe", "https://www.commonmancoffeeroasters.com", "@commonmancoffeeroasters", "info@commonmancoffeeroasters.com", "Flagship roastery in Robertson Quay; premium tea & coffee menu"),
-    ("Singapore", "Singapore", "Tiong Hoe Specialty Coffee", "Specialty Cafe", "https://www.tionghoecoffee.com", "@tionghoecoffee", "tionghoe@gmail.com", "Micro-roaster; single-origin focus; curated alternative beverages"),
-    ("Singapore", "Singapore", "Homeground Coffee Roasters", "Specialty Cafe", "https://homegroundcoffee.sg", "@homegroundcoffeeroasters", "hello@homegroundcoffee.sg", "Community-first roastery; specialty tea interest; Tiong Bahru location"),
-    ("Singapore", "Singapore", "Strangers' Reunion", "Specialty Cafe", "https://www.strangersreunion.com", "@strangersreunion", "hello@strangersreunion.com", "Tiong Bahru café icon; known for quality beverages; Japanese tea potential"),
+    ("Singapore", "Singapore", "Common Man Coffee Roasters", "Specialty Cafe", "https://www.commonmancoffeeroasters.com", "@commonmancoffeeroasters", "info@cmcroasters.com", "Flagship roastery in Robertson Quay; premium tea & coffee menu"),
+    ("Singapore", "Singapore", "Tiong Hoe Specialty Coffee", "Specialty Cafe", "https://tionghoe.com", "@tionghoespecialtycoffee", "hello@tionghoe.com", "Micro-roaster; single-origin focus; curated alternative beverages"),
+    ("Singapore", "Singapore", "Homeground Coffee Roasters", "Specialty Cafe", "https://homegroundcoffeeroasters.com", "@homeground.coffee", "hello@homegroundcoffeeroasters.com", "Community-first roastery; specialty tea interest; Tiong Bahru location"),
+    ("Singapore", "Singapore", "Strangers' Reunion", "Specialty Cafe", "https://www.strangersreunion.com", "@strangersreu", "enquiries@strangersreunion.com", "Tiong Bahru café icon; known for quality beverages; Japanese tea potential"),
     ("Singapore", "Singapore", "Proud Mary Coffee", "Specialty Cafe", "https://proudmarycoffee.com.au", "@proudmarycoffee", "singapore@proudmarycoffee.com", "Melbourne-origin specialty roaster; global expansion; premium tea interest"),
     # Tea Brands
     ("Singapore", "Singapore", "TWG Tea", "Tea Brand", "https://twgtea.com", "@twgtea", "retail@twgtea.com", "Founded in SG 2008; 1,000+ blends; 70+ boutiques globally; key partner prospect"),
@@ -60,7 +60,7 @@ data = [
     ("Singapore", "Singapore", "The Singapore EDITION", "Luxury Hotel", "https://www.editionhotels.com/singapore", "@editionhotels", "singapore@editionhotels.com", "Opened 2024 Orchard Road; signature Black Tea fragrance; trendsetting F&B"),
     ("Singapore", "Singapore", "Conrad Singapore Orchard", "Luxury Hotel", "https://www.hilton.com/en/hotels/sinorci-conrad-singapore-orchard", "@conradsingapore", "conradsingaporedinings@conradhotels.com", "Opened 2024; 10 bars & restaurants incl. Michelin-starred Chinese restaurant"),
     # Luxury Restaurants
-    ("Singapore", "Singapore", "Odette", "Luxury Restaurant", "https://www.odetterestaurant.com", "@odetterestaurant", "reservations@odetterestaurant.com", "3 Michelin stars; Asia's 50 Best; French contemporary; premium tea pairing"),
+    ("Singapore", "Singapore", "Odette", "Luxury Restaurant", "https://www.odetterestaurant.com", "@odetterestaurant", "enquiry@odetterestaurant.com", "3 Michelin stars; Asia's 50 Best; French contemporary; premium tea pairing"),
     ("Singapore", "Singapore", "Les Amis", "Luxury Restaurant", "https://www.lesamis.com.sg", "@lesamis_sg", "reservations@lesamis.com.sg", "3 Michelin stars; classic French fine dining; curated beverage pairing menu"),
     ("Singapore", "Singapore", "Jaan by Kirk Westaway", "Luxury Restaurant", "https://www.jaan.com.sg", "@jaanbykirk", "reservations@jaan.com.sg", "1 Michelin star; British contemporary; 70th floor Swissôtel; tea pairings"),
     ("Singapore", "Singapore", "Burnt Ends", "Luxury Restaurant", "https://www.burntends.com.sg", "@burntends_sg", "reservations@burntends.com.sg", "1 Michelin star; Australia-style open-fire; adventurous beverage pairings"),
@@ -82,7 +82,7 @@ data = [
     ("Hong Kong", "Hong Kong", "Lock Cha Tea Shop", "Tea Brand", "https://www.lockcha.com", "@lockchateashop", "info@lockcha.com", "Renowned HK traditional tea house; specializes in quality Chinese teas"),
     ("Hong Kong", "Hong Kong", "Yú Tea House", "Tea Brand", "https://www.yuteahouse.com", "@yuteahouse", "hello@yuteahouse.com", "Curated Asian tea programs; in-hotel concepts at Four Seasons HK"),
     ("Hong Kong", "Hong Kong", "TWG Tea Hong Kong", "Tea Brand", "https://twgtea.com", "@twgtea", "hongkong@twgtea.com", "Luxury SG tea brand; HarbourCity & IFC locations; premium Japanese blends"),
-    ("Hong Kong", "Hong Kong", "Teakha", "Tea Brand", "https://www.teakha.com", "@teakha", "hello@teakha.com", "Artisan tea atelier; Sheung Wan; curates rare Asian teas incl. Japanese varieties"),
+    ("Hong Kong", "Hong Kong", "Teakha", "Tea Brand", "https://www.teakha.com", "@teakha", "discover@teakha.com", "Artisan tea atelier; Sheung Wan; curates rare Asian teas incl. Japanese varieties"),
     # Luxury Hotels
     ("Hong Kong", "Hong Kong", "The Peninsula Hong Kong", "Luxury Hotel", "https://www.peninsula.com/en/hong-kong", "@thepeninsulahotels", "phk@peninsula.com", "Legendary 5-star; iconic afternoon tea; Peninsula blend; premium partner"),
     ("Hong Kong", "Hong Kong", "Rosewood Hong Kong", "Luxury Hotel", "https://www.rosewoodhotels.com/en/hong-kong", "@rosewoodhongkong", "rhongkong@rosewoodhotels.com", "Ultra-luxury Victoria Harbour; Holt's Café tea house; premium F&B partner"),
@@ -103,17 +103,17 @@ data = [
     # ===== BANGKOK (30 stores) =====
     # Specialty Cafes
     ("Thailand", "Bangkok", "Roots Coffee", "Specialty Cafe", "https://rootsbkk.com", "@rootsbkk", "hello@rootsbkk.com", "Pioneer Thai specialty coffee since 2013; 73K IG followers; Thai-only beans"),
-    ("Thailand", "Bangkok", "Ceresia Coffee Roasters", "Specialty Cafe", "https://www.ceresiacoffee.com", "@ceresiacoffee", "info@ceresiacoffee.com", "Founded 2013; influential BKK roaster; small batch; tea & coffee menu"),
+    ("Thailand", "Bangkok", "Ceresia Coffee Roasters", "Specialty Cafe", "https://ceresiacoffeeroasters.com", "@ceresiacoffee", "info@ceresiacoffeeroasters.com", "Founded 2013; influential BKK roaster; small batch; tea & coffee menu"),
     ("Thailand", "Bangkok", "Brave Roasters", "Specialty Cafe", "https://www.braveroasters.com", "@braveroasters", "info@braveroasters.com", "Siam Discovery & multiple locations; Thai specialty beans; premium menu"),
-    ("Thailand", "Bangkok", "Nana Roasters", "Specialty Cafe", "https://www.nanaroasters.com", "@nanaroasters", "hello@nanaroasters.com", "World Siphonist Champion 2018; National Brewers Cup 2024; hojicha & matcha menu"),
-    ("Thailand", "Bangkok", "Ink & Lion Café", "Specialty Cafe", "https://www.inkandlioncafe.com", "@inkandlioncafe", "hello@inkandlioncafe.com", "Ekkamai micro-roastery; art-focused space; tea & coffee gear retail"),
+    ("Thailand", "Bangkok", "Nana Coffee Roasters", "Specialty Cafe", "https://nanacoffeeroasters.com", "@nanacoffeeroasters", "info@nanacoffeeroasters.com", "World Siphonist Champion 2018; National Brewers Cup 2024; hojicha & matcha menu"),
+    ("Thailand", "Bangkok", "Ink & Lion Café", "Specialty Cafe", "https://www.facebook.com/inkandlioncafe", "@inkandlioncafe", "inkandlioncafe@gmail.com", "Ekkamai micro-roastery; art-focused space; tea & coffee gear retail"),
     ("Thailand", "Bangkok", "Mother Roaster", "Specialty Cafe", "https://www.motherroaster.coffee", "@motherroaster", "hello@motherroaster.coffee", "Filter-only; Northern Thai beans; elegant café vibe; premium tea interest"),
     ("Thailand", "Bangkok", "Ratio Coffee & Pastry", "Specialty Cafe", "https://www.ratiobkk.com", "@ratiobkk", "hello@ratiobkk.com", "Specialty café; BKK specialty scene fixture; premium pastry & beverage pairing"),
-    ("Thailand", "Bangkok", "Kaizen Coffee Company", "Specialty Cafe", "https://www.kaizencoffeeco.com", "@kaizencoffeeco", "hello@kaizencoffeeco.com", "Japanese-influenced BKK café; name means 'improvement'; Japanese tea affinity"),
+    ("Thailand", "Bangkok", "Kaizen Coffee Company", "Specialty Cafe", "https://www.kaizencoffee.com", "@kaizencoffeeco", "info@kaizencoffee.com", "Japanese-influenced BKK café; name means 'improvement'; Japanese tea affinity"),
     ("Thailand", "Bangkok", "Qraft / Peace Oriental Teahouse", "Specialty Cafe", "https://www.peaceteahouse.com", "@peaceteahouse", "hello@peaceteahouse.com", "Orient tea-focused; Ari & Empire Tower (55F); full tea pairing menu; top partner"),
-    ("Thailand", "Bangkok", "Walden Woods Bangkok", "Specialty Cafe", "https://www.waldenwoodsbkk.com", "@waldenwoodsbkk", "hello@waldenwoodsbkk.com", "Kyoto-inspired minimalist café; slow-brew filter; Japanese aesthetic; ideal fit"),
+    ("Thailand", "Bangkok", "Walden Woods Bangkok", "Specialty Cafe", "https://www.instagram.com/waldenwoodsbangkok", "@waldenwoodsbkk", "waldenwoodsbangkok@gmail.com", "Kyoto-inspired minimalist café; slow-brew filter; Japanese aesthetic; ideal fit"),
     # Tea Brands
-    ("Thailand", "Bangkok", "Monsoon Tea", "Tea Brand", "https://www.monsoontea.co", "@monsoontea", "info@monsoontea.co", "Premium Thai tea brand; wild-harvested teas; specialty tea curators; key partner"),
+    ("Thailand", "Bangkok", "Monsoon Tea", "Tea Brand", "https://www.monsoontea.co.th", "@monsoontea", "info@monsoontea.co.th", "Premium Thai tea brand; wild-harvested teas; specialty tea curators; key partner"),
     ("Thailand", "Bangkok", "Punnpreeda Tea", "Tea Brand", "https://www.punnpreeda.com", "@punnpreeda", "info@punnpreeda.com", "Artisan Thai tea brand; curated premium blends; specialty retail"),
     ("Thailand", "Bangkok", "Doi Chaang Coffee & Tea", "Tea Brand", "https://www.doichaangcoffee.com", "@doichaangcoffee", "info@doichaangcoffee.com", "Renowned Thai highland brand; exports globally; tea & coffee portfolio"),
     ("Thailand", "Bangkok", "O-Oh Farm Suanluang", "Tea Brand", "https://www.o-ohfarm.com", "@o_ohfarm", "contact@o-ohfarm.com", "Organic Thai farm-to-table; specialty tea & produce; eco-conscious partner"),
@@ -141,10 +141,10 @@ data = [
     ("UAE", "Dubai", "Fuze Caffè", "Specialty Cafe", "https://www.fuzecaffe.ae", "@fuzecaffe", "info@fuzecaffe.ae", "Specialty café Al Habtoor City; single-origin from Kenya, Ethiopia; Dubai Marina"),
     ("UAE", "Dubai", "Nomad Day Bar (by Nightjar Coffee)", "Specialty Cafe", "https://www.nomaddaybar.com", "@nomaddaybar", "hello@nomaddaybar.com", "Specialty all-day café; One Central; co-working space; Nightjar collaboration"),
     ("UAE", "Dubai", "Mokha 1450", "Specialty Cafe", "https://www.mokha1450.com", "@mokha1450", "info@mokha1450.com", "Luxury UAE specialty coffee brand; prominent regional high-end positioning"),
-    ("UAE", "Dubai", "Arabian Tea House", "Specialty Cafe", "https://www.arabianteahouse.ae", "@arabianteahouse", "info@arabianteahouse.ae", "Al Fahidi district; 100+ tea varieties; authentic courtyard; Japanese tea fit"),
+    ("UAE", "Dubai", "Arabian Tea House", "Specialty Cafe", "https://arabianteahouse.com", "@arabianteahouse", "info@arabianteahouse.com", "Al Fahidi district; 100+ tea varieties; authentic courtyard; Japanese tea fit"),
     ("UAE", "Dubai", "Raw Coffee Company", "Specialty Cafe", "https://www.rawcoffeecompany.com", "@rawcoffeecompany", "info@rawcoffeecompany.com", "Dubai pioneer specialty roaster; direct-trade; Al Quoz roastery; premium teas"),
-    ("UAE", "Dubai", "The Sum of Us", "Specialty Cafe", "https://www.thesumofus.com", "@thesumofus_dxb", "hello@thesumofus.com", "Award-winning Dubai café; artisan bakery; specialty coffee & tea; DIFC location"),
-    ("UAE", "Dubai", "Stomping Grounds Coffee", "Specialty Cafe", "https://www.stompinggrounds.coffee", "@stompinggrounds.ae", "info@stompinggrounds.coffee", "Specialty café; City Walk & JLT; curated single-origin; premium tea bar"),
+    ("UAE", "Dubai", "The Sum of Us", "Specialty Cafe", "https://www.thesumofusdubai.com", "@thesumofus_dxb", "hello@thesumofusdubai.com", "Award-winning Dubai café; artisan bakery; specialty coffee & tea; DIFC location"),
+    ("UAE", "Dubai", "Stomping Grounds Coffee", "Specialty Cafe", "https://www.stompinggrounds.ae", "@stompinggroundsdxb", "info@stompinggrounds.ae", "Specialty café; City Walk & JLT; curated single-origin; premium tea bar"),
     ("UAE", "Dubai", "Armani/Caffè – Dubai Mall", "Specialty Cafe", "https://www.armani.com/en-ae/armani-caffe", "@armanicaffe_dubai", "dubai.caffe@armani.com", "Luxury fashion café; Fashion Avenue Dubai Mall; all-day dining; premium tea menu"),
     ("UAE", "Dubai", "Blue Box Café by Tiffany – Dubai Mall", "Specialty Cafe", "https://www.tiffany.com", "@tiffanyandco", "dubai.bluebox@tiffany.com", "Only Blue Box Café in Middle East; Dubai Mall; Tea at Tiffany's afternoon tea"),
     # Tea Brands
