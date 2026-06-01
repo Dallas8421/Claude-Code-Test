@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>和田園 | 農林水産大臣賞の狭山茶（埼玉県所沢市）</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'ヒラギノ明朝 ProN W3', Georgia, serif;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ===== Nav ===== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #1a4a1a;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: #1a4a1a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem;
+    }
+    .nav-links {
+      display: flex; gap: 40px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: #333; font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #1a4a1a; }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      height: 92vh; min-height: 560px;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    /* Multi-layer background: tea field feel */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, #2d5a1b 0%, #4a7a2a 35%, #6b9e40 60%, #3a6820 100%);
+      background-size: cover;
+    }
+    /* Subtle tea-row pattern overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        175deg,
+        transparent 0px, transparent 28px,
+        rgba(255,255,255,0.04) 28px, rgba(255,255,255,0.04) 30px
+      );
+    }
+    .hero-content {
+      position: relative;
+      padding: 0 80px;
+      color: #fff;
+      max-width: 620px;
+    }
+    .hero-badge-row {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.85rem; opacity: 0.85; margin-bottom: 18px;
+      letter-spacing: 0.05em;
+    }
+    .hero-badge-row span { opacity: 0.6; }
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.3;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+      font-weight: 900;
+    }
+    .hero-content p {
+      font-size: 1rem; line-height: 1.8;
+      opacity: 0.9; margin-bottom: 36px;
+    }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-primary {
+      display: inline-block; background: #1a4a1a; color: #fff;
+      padding: 13px 32px; text-decoration: none; font-size: 0.95rem;
+      border: 2px solid #1a4a1a; transition: all 0.2s;
+    }
+    .btn-primary:hover { background: #2d6e2d; border-color: #2d6e2d; }
+    .btn-secondary {
+      display: inline-block; background: transparent; color: #fff;
+      padding: 13px 32px; text-decoration: none; font-size: 0.95rem;
+      border: 2px solid rgba(255,255,255,0.7); transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* ===== Hero overlays: owner + medal ===== */
+    .hero-portraits {
+      position: absolute;
+      right: 80px; bottom: 48px;
+      display: flex; align-items: flex-end; gap: -20px;
+    }
+    /* Owner circular photo */
+    .owner-circle {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 5px solid rgba(255,255,255,0.9);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+      background: #3a6820;
+      flex-shrink: 0;
+    }
+    .owner-circle img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    }
+    /* Leaf ring decoration */
+    .owner-circle::before {
+      content: '';
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #5a9e30 0deg 20deg, transparent 20deg 30deg,
+        #5a9e30 30deg 50deg, transparent 50deg 60deg,
+        #5a9e30 60deg 80deg, transparent 80deg 90deg,
+        #5a9e30 90deg 110deg, transparent 110deg 120deg,
+        #5a9e30 120deg 140deg, transparent 140deg 150deg,
+        #5a9e30 150deg 170deg, transparent 170deg 180deg,
+        #5a9e30 180deg 200deg, transparent 200deg 210deg,
+        #5a9e30 210deg 230deg, transparent 230deg 240deg,
+        #5a9e30 240deg 260deg, transparent 260deg 270deg,
+        #5a9e30 270deg 290deg, transparent 290deg 300deg,
+        #5a9e30 300deg 320deg, transparent 320deg 330deg,
+        #5a9e30 330deg 350deg, transparent 350deg 360deg
+      );
+      z-index: -1;
+    }
+    /* Award medal badge */
+    .medal-badge {
+      position: absolute;
+      right: 72px; bottom: 220px;
+      width: 110px; height: 110px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Features ===== */
+    .features { background: #f7f5f0; padding: 80px 48px; }
+    .section-header {
+      text-align: center; margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 14px;
+    }
+    .underline {
+      width: 56px; height: 3px; background: #1a4a1a; margin: 0 auto;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px; max-width: 900px; margin: 0 auto;
+    }
+    .feature-item { text-align: center; }
+    .feature-icon { font-size: 2.4rem; margin-bottom: 14px; }
+    .feature-item h3 { font-size: 1.05rem; margin-bottom: 10px; }
+    .feature-item p { font-size: 0.88rem; color: #666; line-height: 1.75; }
+
+    /* ===== Products ===== */
+    #products { padding: 80px 48px; }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 28px; max-width: 1100px; margin: 0 auto 48px;
+    }
+    .product-card {
+      border: 1px solid #e8e8e4;
+      overflow: hidden; transition: box-shadow 0.25s;
+    }
+    .product-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.1); }
+    .product-img-wrap {
+      width: 100%; height: 220px; overflow: hidden;
+      background: linear-gradient(135deg, #3a6820, #1a4a1a);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .product-img { transform: scale(1.04); }
+    .product-body { padding: 24px; }
+    .product-body h3 { font-size: 1.05rem; margin-bottom: 12px; font-weight: bold; }
+    .product-body p { font-size: 0.88rem; color: #666; line-height: 1.75; margin-bottom: 20px; }
+    .btn-detail {
+      display: block; background: #1a4a1a; color: #fff;
+      text-align: center; padding: 12px; text-decoration: none;
+      font-size: 0.93rem; transition: background 0.2s;
+    }
+    .btn-detail:hover { background: #2d6e2d; }
+    .products-center { text-align: center; }
+
+    /* ===== Experience ===== */
+    .experience { background: #f7f5f0; padding: 80px 48px; }
+    .experience-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      max-width: 1000px; margin: 0 auto;
+      overflow: hidden;
+    }
+    .experience-img {
+      width: 100%; height: 380px; object-fit: cover; display: block;
+      background: linear-gradient(135deg, #4a7a2a, #2d5a1b);
+    }
+    .experience-body {
+      background: #fff; padding: 52px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .experience-body h3 { font-size: 1.4rem; margin-bottom: 16px; }
+    .experience-body p { font-size: 0.93rem; color: #555; line-height: 1.85; margin-bottom: 28px; }
+
+    /* ===== Contact ===== */
+    #contact { padding: 80px 48px; text-align: center; }
+    .contact-info { font-size: 0.95rem; color: #555; margin-bottom: 36px; line-height: 1.9; }
+    .contact-info strong { color: #1a4a1a; }
+    .contact-form {
+      max-width: 540px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 16px; border: 1px solid #ddd;
+      font-size: 0.93rem; font-family: inherit; resize: vertical;
+    }
+    .contact-form textarea { min-height: 120px; }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #1a4a1a; color: rgba(255,255,255,0.75);
+      text-align: center; padding: 28px 48px; font-size: 0.82rem;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .hero-content { padding: 0 24px; }
+      .hero-portraits { right: 20px; bottom: 24px; }
+      .owner-circle { width: 130px; height: 130px; }
+      .medal-badge { width: 80px; height: 80px; right: 16px; bottom: 150px; }
+      #products, .features, .experience, #contact { padding: 60px 20px; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .experience-img { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-icon">🍃</div>
+    和田園
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">特徴</a></li>
+    <li><a href="#products">商品</a></li>
+    <li><a href="#experience">体験</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge-row">
+      昭和26年創業 <span>|</span> 農林水産大臣賞受賞
+    </div>
+    <h1>農林水産大臣賞受賞<br>狭山茶</h1>
+    <p>手摘みの美味しいお茶を作っております。<br>現地販売、通信販売あり</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">商品を見る</a>
+      <a href="#contact" class="btn-secondary">詳しく見る</a>
+    </div>
+  </div>
+
+  <!-- オーナー写真（丸切り抜き）-->
+  <div class="hero-portraits">
+    <div class="owner-circle">
+      <!--
+        オーナー写真: wadaen.jp から取得
+        ブラウザで確認できなければ、以下を実際の画像URLに変更してください
+      -->
+      <img
+        src="https://wadaen.jp/img/owner.jpg"
+        alt="和田園 代表"
+        onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#4a7a2a,#2d5a1b)'"
+      >
+    </div>
+  </div>
+
+  <!-- 農林水産大臣賞 メダルバッジ（SVG インライン）-->
+  <div class="medal-badge">
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- 外側の放射線リボン -->
+      <g transform="translate(60,60)">
+        <circle r="56" fill="none" stroke="#d4a017" stroke-width="2" stroke-dasharray="6 4"/>
+        <!-- 光線 -->
+        <g fill="#d4a017" opacity="0.7">
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(30)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(60)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(90)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(120)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(150)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(180)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(210)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(240)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(270)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(300)"/>
+          <rect x="-1.5" y="-56" width="3" height="10" rx="1" transform="rotate(330)"/>
+        </g>
+        <!-- メイン円 -->
+        <circle r="44" fill="url(#goldGrad)"/>
+        <!-- 内側リング -->
+        <circle r="40" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+        <circle r="35" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <!-- 星マーク -->
+        <polygon points="0,-22 5.2,-7.2 20.9,-7.2 8.5,2.8 13.7,17.6 0,7.6 -13.7,17.6 -8.5,2.8 -20.9,-7.2 -5.2,-7.2"
+          fill="#fff" opacity="0.95"/>
+        <!-- テキスト -->
+        <text y="28" text-anchor="middle" fill="#fff" font-size="7.5" font-family="serif" font-weight="bold" letter-spacing="0.5">農林水産</text>
+        <text y="38" text-anchor="middle" fill="#fff" font-size="7.5" font-family="serif" font-weight="bold" letter-spacing="0.5">大臣賞</text>
+      </g>
+      <defs>
+        <radialGradient id="goldGrad" cx="40%" cy="35%" r="60%">
+          <stop offset="0%"   stop-color="#f5d060"/>
+          <stop offset="50%"  stop-color="#d4a017"/>
+          <stop offset="100%" stop-color="#a07010"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== Features ===== -->
+<section class="features" id="features">
+  <div class="section-header">
+    <h2>和田園の特徴</h2>
+    <div class="underline"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🏆</div>
+      <h3>農林水産大臣賞受賞</h3>
+      <p>全国茶品評会にて農林水産大臣賞を複数回受賞。品質の高い狭山茶をお届けします。</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🌿</div>
+      <h3>自社農園の一番茶</h3>
+      <p>自社農園で丁寧に育てた一番茶のみを使用。豊かな香りと深いコクが自慢です。</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📦</div>
+      <h3>全国発送対応</h3>
+      <p>ご自宅へのお届けはもちろん、贈り物・ギフトとしてのご注文も承っております。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Products ===== -->
+<section id="products">
+  <div class="section-header">
+    <h2>様々なお茶を<br>ご用意しています</h2>
+    <div class="underline"></div>
+  </div>
+  <div class="products-grid">
+
+    <!-- 農林水産大臣賞受賞茶 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="https://wadaen.jp/img/products/daijinsho.jpg"
+          alt="農林水産大臣賞受賞茶"
+          loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/GreenTea_s3.jpg/600px-GreenTea_s3.jpg'; this.onerror=null;"
+        >
+      </div>
+      <div class="product-body">
+        <h3>農林水産大臣賞受賞茶</h3>
+        <p>2021年 農林水産大臣賞受賞茶を発売しました。</p>
+        <a href="https://wadaen.jp/products.html" class="btn-detail">詳しく見る</a>
+      </div>
+    </div>
+
+    <!-- 狭山抹茶 最中あいす -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="https://wadaen.jp/img/products/monaka_ice.jpg"
+          alt="狭山抹茶 最中あいす"
+          loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Matcha_Usucha.jpg/600px-Matcha_Usucha.jpg'; this.onerror=null;"
+        >
+      </div>
+      <div class="product-body">
+        <h3>狭山抹茶 最中あいす</h3>
+        <p>新製品「狭山抹茶 最中あいす（10個セット）」を発売しました。</p>
+        <a href="https://wadaen.jp/products.html" class="btn-detail">詳しく見る</a>
+      </div>
+    </div>
+
+    <!-- お試しバラエティパック -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="https://wadaen.jp/img/products/variety_pack.jpg"
+          alt="お試しバラエティパック"
+          loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Sencha_tea.jpg/600px-Sencha_tea.jpg'; this.onerror=null;"
+        >
+      </div>
+      <div class="product-body">
+        <h3>お試しバラエティパック</h3>
+        <p>7種のお茶の飲み比べができる「お試しバラエティパック」。送料無料です。</p>
+        <a href="https://wadaen.jp/products.html" class="btn-detail">詳しく見る</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="products-center">
+    <a href="https://wadaen.jp/products.html" class="btn-primary">全商品を見る</a>
+  </div>
+</section>
+
+<!-- ===== Experience ===== -->
+<section class="experience" id="experience">
+  <div class="section-header">
+    <h2>お茶を楽しむ体験</h2>
+    <div class="underline"></div>
+  </div>
+  <div class="experience-grid">
+    <img
+      class="experience-img"
+      src="https://wadaen.jp/img/experience.jpg"
+      alt="茶園体験"
+      loading="lazy"
+      onerror="this.style.background='linear-gradient(135deg,#4a7a2a,#2d5a1b)'; this.style.display='block';"
+    >
+    <div class="experience-body">
+      <h3>茶摘み体験・茶葉教室</h3>
+      <p>和田園では、自社農園での茶摘み体験や、お茶の淹れ方教室を開催しています。お茶の豊かな世界をご家族みなさまで体験していただけます。</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">お申し込み・お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section id="contact">
+  <div class="section-header">
+    <h2>お問い合わせ</h2>
+    <div class="underline"></div>
+  </div>
+  <p class="contact-info">
+    〒359-1164 埼玉県所沢市三ケ島3-1157-3<br>
+    <strong>TEL / FAX：</strong>04-2948-0626<br>
+    <strong>営業時間：</strong>9:00〜18:00（水曜定休）
+  </p>
+  <form class="contact-form" onsubmit="return false;">
+    <input type="text" placeholder="お名前" required>
+    <input type="email" placeholder="メールアドレス" required>
+    <textarea placeholder="お問い合わせ内容"></textarea>
+    <button type="submit" class="btn-primary" style="border:none;cursor:pointer;font-size:0.95rem;font-family:inherit;">送信する</button>
+  </form>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <p>&copy; 2024 和田園 | 農林水産大臣賞の狭山茶（埼玉県所沢市）</p>
+</footer>
+
+</body>
+</html>
